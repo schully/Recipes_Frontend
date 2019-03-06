@@ -3,7 +3,7 @@ import { submitRecipe } from './service';
 import './styles.scss'
 
 export default class AddForm extends React.Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props)
     this.state = {
       inputName: '',
@@ -12,12 +12,12 @@ export default class AddForm extends React.Component {
     }
   }
 
-  async submit(){
+  async submit() {
     let recipeId = await submitRecipe()
-    this.navigateToRecipe(recipeId)
+    this.navigateToRecipe()
   }
 
-  navigateToRecipe(recipeId) {
+  async navigateToRecipe(recipeId?: Number) {
 
   }
 
@@ -33,19 +33,25 @@ export default class AddForm extends React.Component {
           <label>Name</label>
           <input onChange={e => this.setState({
             inputName: e.target.value
-          })} value={this.state.inputName} />
+          })}
+          // value={this.state.inputName}
+          />
         </div>
         <div id="recipe-description">
           <label>Description</label>
           <input onChange={e => this.setState({
             inputDescription: e.target.value
-          })} value={this.state.inputDescription} />
+          })}
+          //  value={this.state.inputDescription}
+          />
         </div>
         <div id="recipe-instructions">
           <label>Instructions</label>
           <input onChange={e => this.setState({
             inputInstructions: e.target.value
-          })} value={this.state.inputInstructions} />
+          })}
+          //  value={this.state.inputInstructions}
+          />
         </div>
         <button>Submit</button>
       </form>

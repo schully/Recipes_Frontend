@@ -1,5 +1,6 @@
 import React from 'react'
 import { submitRecipe } from './service';
+import './styles.scss'
 
 export default class AddForm extends React.Component {
   constructor(props) {

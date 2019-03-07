@@ -5,14 +5,15 @@ import {
   BrowserRouter, Route, Switch
 } from 'react-router-dom'
 
-export default () => {
+export default () => (
   <BrowserRouter basename="">
     <Switch>
       <Route exact path="/" component={AddRecipe} />
+      {/*<Route exact path="/recipies" component={} />*/}
       <Route exact path="/recipe/new" component={AddForm} />
     </Switch>
   </BrowserRouter>
-}
+)
 
 /*
 export default class App extends Component {

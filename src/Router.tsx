@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddRecipe from './components/AddRecipe';
 import AddForm from './components/AddForm';
+import Login from './components/Login'
 import {
   BrowserRouter, Route, Switch
 } from 'react-router-dom'
@@ -9,6 +10,7 @@ export default () => (
   <BrowserRouter basename="">
     <Switch>
       <Route exact path="/" component={AddRecipe} />
+      <Route exact path="/login" component={Login} />
       {/*<Route exact path="/recipies" component={} />*/}
       <Route exact path="/recipe/new" component={AddForm} />
     </Switch>

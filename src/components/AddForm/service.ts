@@ -3,7 +3,7 @@
  * @returns The ID of the created recioe.
  */
 export async function submitRecipe(name?:string,description?:string,instructions?:string){
-  let result = await fetch("://localhost:8080/recipes_backend/", {
+  let result = await fetch("://localhost:8080/recipes/api", {
     "method": "POST",
     body: JSON.stringify({
       name,

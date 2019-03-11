@@ -1,41 +1,52 @@
-import React, {Component} from "react";
-import './service'
+import React, { Component } from "react";
+import { RouteComponentProps } from 'react-router-dom';
+import GlobalHeader from "../GlobalHeader";
+import './service';
+import register from "./service";
 
-export default class Login extends Component {
-  constructor(props:any) {
+class State {
+  inputUsername = ''
+  inputPassword = ''
+}
+
+export default class Login extends Component<RouteComponentProps,State> {
+  constructor(props: any) {
     super(props)
-    this.state = {
-      username: '',
-      password: ''
-    }
+    this.state = new State()
   }
 
   async submit() {
-    
+    let s = this.state
+    let greatSuccess = await register(s.inputUsername, s.inputPassword)
+
+    if (greatSuccess) {
+      this.props.history.push('/');
+    }
   }
 
   render() {
     return <div>
+      <GlobalHeader />
       <form onSubmit={e => {
         e.preventDefault();
 
         //  submit
         this.submit();
       }}>
-        <div id="recipe-name">
-          <label>Name</label>
+        <div id="username">
+          <label>username</label>
           <input onChange={e => this.setState({
-            inputName: e.target.value
+            inputUsername: e.target.value
           })}
-          // value={this.state.inputName}
+          value={this.state.inputUsername}
           />
         </div>
-        <div id="recipe-description">
-          <label>Description</label>
+        <div id="password">
+          <label>Password</label>
           <input onChange={e => this.setState({
-            inputDescription: e.target.value
+            inputPassword: e.target.value
           })}
-          //  value={this.state.inputDescription}
+          value={this.state.inputPassword}
           />
         </div>
         <button>Submit</button>

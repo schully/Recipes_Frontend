@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { fetchRecipe } from './service';
+import './styles.scss'
 
 class State {
   name: string = ""
+  picture: string = ""
   author: string = ""
   description: string = ""
   instructions: string = ""
@@ -27,6 +29,7 @@ export default class RecipeScreen extends React.Component<RouteComponentProps, S
     let result = await fetchRecipe(recipeId)
     this.setState({
        name: result.name,
+       picture: result.picture,
        author: result.author,
        description: result.description,
        instructions: result.instructions,
@@ -35,15 +38,17 @@ export default class RecipeScreen extends React.Component<RouteComponentProps, S
       })
     console.log("HELLO FROM RECIPE ICD", result)
   }
+  
   render() {
+    console.log(this.state.picture);
     return <div>
-      <h3>{this.state.name}</h3>
-      <h3>__(INSERT PIC HERE)__</h3>
+      <h1>{this.state.name}</h1>
+      <img src={this.state.picture} alt="insertPicHERE" />    
       <h3>{this.state.author}</h3>
-      <h3>{this.state.description}</h3>
-      <h3>{this.state.instructions}</h3>
-      <h3>{this.state.category}</h3>
-      <h3>{this.state.ingredients}</h3>
+      <p>{this.state.description}</p>
+      <p>{this.state.instructions}</p>
+      <h4>{this.state.category}</h4>
+      <h4>{this.state.ingredients}</h4>
     </div>
   }
 }

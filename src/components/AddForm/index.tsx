@@ -6,6 +6,7 @@ import { RouteComponentProps } from 'react-router';
 
 class State {
   inputName: string = '';
+  inputPicture: string = '';
   inputDescription: string = '';
   inputInstructions: string = '';
   inputCategory: string = '';
@@ -19,7 +20,7 @@ export default class AddForm extends React.Component<RouteComponentProps, State>
 
   async submit() {
     let s = this.state;
-    let recipeId = await submitRecipe(s.inputName, s.inputDescription, s.inputInstructions, s.inputCategory.trim())
+    let recipeId = await submitRecipe(s.inputName, s.inputPicture, s.inputDescription, s.inputInstructions, s.inputCategory.trim())
     this.navigateToRecipe(recipeId)
   }
 
@@ -38,6 +39,7 @@ export default class AddForm extends React.Component<RouteComponentProps, State>
       }}>
         <div id="recipe-name">
           <label>Name</label>
+          <br />
           <input
             onChange={e => this.setState({
               inputName: e.target.value
@@ -45,8 +47,19 @@ export default class AddForm extends React.Component<RouteComponentProps, State>
             value={this.state.inputName}
           />
         </div>
+        <div id='recipe-picture'>
+          <label>Picture</label>
+          <br />
+          <input
+            onChange={e => this.setState({
+              inputPicture: e.target.value
+            })}
+            value={this.state.inputPicture}
+          />
+        </div>
         <div id="recipe-description">
           <label>Description</label>
+          <br />
           <input
             onChange={e => this.setState({
               inputDescription: e.target.value
@@ -56,6 +69,7 @@ export default class AddForm extends React.Component<RouteComponentProps, State>
         </div>
         <div id="recipe-instructions">
           <label>Instructions</label>
+          <br />
           <input
             onChange={e => this.setState({
               inputInstructions: e.target.value
@@ -65,6 +79,7 @@ export default class AddForm extends React.Component<RouteComponentProps, State>
         </div>
         <div id="recipe-category">
           <label>Category</label>
+          <br />
           <input
             onChange={e => this.setState({
               inputCategory: e.target.value

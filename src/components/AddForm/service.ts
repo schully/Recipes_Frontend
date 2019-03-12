@@ -4,7 +4,7 @@ import { getBasicCredentials } from "../Login/service";
 /**
  * @returns The ID of the created recioe.
  */
-export async function submitRecipe(name:string, description:string, instructions:string, category: string){
+export async function submitRecipe(name:string,picture:string ,description:string, instructions:string, category: string){
   let result = await fetch("//localhost:8080/recipes/api/addrecipe", {
     "method": "POST",
     headers: {

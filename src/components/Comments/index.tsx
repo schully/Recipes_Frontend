@@ -31,7 +31,7 @@ export default class Comments extends React.Component<RouteComponentProps, State
         {
           state.comments.map(c => (
             <div className="comments">
-              <h5>{c.user}</h5>
+              <p>{c.user}:</p>
               <p>{c.text}</p>
             </div>
           ))

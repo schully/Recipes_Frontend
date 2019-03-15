@@ -8,6 +8,7 @@ import { fetchRecipes as fRecipes } from './service'
 import Recipe from '../Models/Recipe';
 import RecipePreview from '../Models/RecipePreview';
 import GlobalHeader from '../GlobalHeader';
+import { Button } from "react-bulma-components/full";
 
 class State {
   recipes: RecipePreview[] = []
@@ -37,17 +38,19 @@ export default class Recipes extends React.Component<RouteComponentProps, State>
 
     return (
       <div>
-        <GlobalHeader/>
+        <GlobalHeader />
+        <br/>
         {
           state.recipes.map(e => (
             <Link to={`/recipe/show/${e.id}`}>
-            <div className="recipes">
-              <h1>{e.name}</h1>
-              <img src={e.imageUrl} />
-            </div>
+              <div className="recipes">
+                <h1>{e.name}</h1>
+                <img src={e.imageUrl} />
+              </div>
             </Link>
           ))
         }
+
       </div>
     )
   }

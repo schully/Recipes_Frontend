@@ -1,5 +1,4 @@
 export default class {
-  user:number
-  recipe:number
+  user:string
   text:string
 }

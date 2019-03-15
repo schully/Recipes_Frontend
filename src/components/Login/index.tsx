@@ -43,7 +43,7 @@ export default class Login extends Component<RouteComponentProps,State> {
         </div>
         <div id="password">
           <label>Password</label>
-          <input onChange={e => this.setState({
+          <input type="password" onChange={e => this.setState({
             inputPassword: e.target.value
           })}
           value={this.state.inputPassword}

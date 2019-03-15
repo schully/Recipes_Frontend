@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { fetchRecipe } from './service';
+import { fetchRecipe, submitComment } from './service';
 import RecipeModel from '../Models/Recipe'
 import IngredientPreview from '../Models/IngredientPreview'
 import './styles.scss'
 import { Link } from 'react-router-dom';
 import Comments from '../Comments'
 import GlobalHeader from '../GlobalHeader';
+import { Button } from "react-bulma-components/full";
 
 class State extends RecipeModel {
   name: string = ""
@@ -16,17 +17,19 @@ class State extends RecipeModel {
   instructions: string = ""
   category: string = ""
   ingredients: IngredientPreview[] = []
+  comment: string = ""
 }
 
-
+var recipeId
 export default class RecipeScreen extends React.Component<RouteComponentProps, State> {
   state = new State();
   componentDidMount() {
     this.fetchRecipe()
   }
 
+
   async fetchRecipe() {
-    let recipeId = (this.props.match.params as any).recipeId
+    recipeId = (this.props.match.params as any).recipeId
     let result = await fetchRecipe(recipeId)
     this.setState({
       name: result.name,
@@ -40,18 +43,34 @@ export default class RecipeScreen extends React.Component<RouteComponentProps, S
     console.log("HELLO FROM RECIPE ICD", result)
   }
 
+  async submit() {
+    let s = this.state
+    let c = await submitComment(recipeId, s.comment)
+  }
+
   render() {
+    let props = this.props
     console.log(this.state.ingredients);
+
+    let match = props.match
+    let staticContext = props.staticContext
+    let history = props.history
+    let location = props.location
+
     return <div>
-      
-      <Link className="backHome" to="/">Back</Link>
-      <h1>{this.state.name}</h1>
+      <Button className="backHome">
+        <Link to="/">return</Link>
+      </Button>
+      <p className="title">{this.state.name}</p>
       <img src={this.state.picture} alt="insertPicHERE" />
-      <h3>{this.state.author}</h3>
+      <p className="author">{this.state.author}</p>
+      <br />
       <p>{this.state.description}</p>
+      <br />
       <p>{this.state.instructions}</p>
-      <h4>{this.state.category}</h4>
-      <h4>
+      <br />
+      <p>{this.state.category}</p>
+      <p>
         {
           this.state.ingredients.map(e => (
             <div className="ingredient">
@@ -60,7 +79,31 @@ export default class RecipeScreen extends React.Component<RouteComponentProps, S
             </div>
           ))
         }
-      </h4>
+      </p>
+
+      <form onSubmit={e => {
+        e.preventDefault()
+        this.submit()
+      }}>
+
+        <div id="comment">
+          <br />
+          <input
+            onChange={e => this.setState({
+              comment: e.target.value
+            })}
+            value={this.state.comment}
+          />
+        </div>
+          <Button>Comment</Button>
+
+
+      </form>
+
+      <div>
+        <Comments match={match} staticContext={staticContext} history={history} location={location} />
+
+      </div>
     </div>
   }
 }

@@ -13,6 +13,7 @@ export async function submitRecipe(name:string,picture:string ,description:strin
     },
     body: JSON.stringify({
       name,
+      picture,
       description,
       instructions,
       category

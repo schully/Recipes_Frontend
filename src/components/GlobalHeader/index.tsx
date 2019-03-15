@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from "react-bulma-components/full";
 
 export default function GlobalHeader() {
   return (
     <header>
-      <ul>
-        <li>
-          <Link to="/login">Login </Link>
-          <br />
-          <Link to="/recipe/new">New Recipe </Link>
-          <br />
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
+      <Button size="medium" rounded>
+        <Link to="/login">Login </Link>
+      </Button>
+      
+      <Button size="medium" color="primary" rounded>
+        <Link className="addRecipe" to="/recipe/new">New</Link>
+      </Button>
+
     </header>
 
   )
